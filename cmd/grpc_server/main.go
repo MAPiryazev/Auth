@@ -93,12 +93,12 @@ func (s *server) Delete(ctx context.Context, req *desc.DeleteRequest) (*emptypb.
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":"+strconv.Itoa(grpcPort))
+	lis, err := net.Listen("tcp", ":"+strconv.Itoa(grpcPort)) //создание tcp сокета который будет слушайть входящие соединения на порту grpcPort
 	if err != nil {
 		log.Fatalf("failed to listen api port %v", err)
 	}
 
-	s := grpc.NewServer()
+	s := grpc.NewServer() //создается сервер
 	reflection.Register(s)
 	desc.RegisterNoteV1Server(s, &server{})
 
